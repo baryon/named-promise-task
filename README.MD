@@ -19,7 +19,7 @@ npm install --save named-promise-task
 ``` Javascript
 
 
-const PromiseTask = require('promise-task')
+const PromiseTask = require('named-promise-task')
 
 const sleep = ( ms ) => new Promise( ( resolve, _ ) => setTimeout( () => resolve(), ms ) )
 
