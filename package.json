@@ -1,19 +1,16 @@
 {
-  "name": "promise-task",
+  "name": "named-promise-task",
   "version": "1.0.0",
   "description": "No Queue, Just a simple promise mechanics to help you run serial tasks.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
-  "unpkg": "dist/index.iife.js",
   "scripts": {
     "lint": "standard --parser=babel-eslint --fix",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "author": "LI LLONG <lilong@gmail.com>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.10.5",
