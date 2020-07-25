@@ -10,7 +10,7 @@ This package support named tasks, Please read example.js.
 
 ## Install 
 ``` 
-npm install --save PromiseTask
+npm install --save named-promise-task
 ```
 
 

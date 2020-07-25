@@ -1,4 +1,5 @@
-import babel from 'rollup-plugin-babel'
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+
 import path from 'path'
 import pkg from './package.json'
 
@@ -25,23 +26,9 @@ export default [
       }
     ],
     plugins: [
-      babel({
-        runtimeHelpers: true,
-        exclude: ['node_modules/**'],
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-              targets: {
-                node: 'current'
-              }
-            }
-          ]
-        ],
-        plugins: [
-          '@babel/plugin-transform-runtime'
-        ]
+      getBabelOutputPlugin({
+        presets: ['@babel/preset-env'],
+        plugins: ["@babel/plugin-transform-runtime", "@babel/plugin-proposal-object-rest-spread", "@babel/plugin-proposal-class-properties"]
       })
     ]
   }
