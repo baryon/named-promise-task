@@ -25,4 +25,4 @@ class PromiseTask {
   } )()
 }
 
-module.exports = PromiseTask
+export default PromiseTask

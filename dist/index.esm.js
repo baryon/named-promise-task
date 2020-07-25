@@ -29,5 +29,5 @@ class PromiseTask {
 
 }
 
-module.exports = PromiseTask;
+export default PromiseTask;
 //# sourceMappingURL=index.esm.js.map
