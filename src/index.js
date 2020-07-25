@@ -3,25 +3,26 @@
  * Insipre from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 class PromiseTask {
-  constructor ( namedWorkers ) {
-    this.namedWorkers = namedWorkers
+  constructor ( context, namedWorkers ) {
+    this._context = context
+    this._namedWorkers = namedWorkers
+    this._pending = Promise.resolve();
   }
-
   // task executor
   addTask = ( () => {
     let pending = Promise.resolve();
 
-    const run = async ( name, data ) => {
+    const run = async ( name, ...values ) => {
       try {
         await pending;
       } finally {
-        return this.namedWorkers[name](data);
+        return this._namedWorkers[ name ].call(this._context, ...values );
       }
     }
 
     // update pending promise so that next task could await for it
-    return ( name, data ) => ( pending = run( name, data ) )
-  } )();
+    return ( name, ...values ) => ( pending = run( name, ...values ) )
+  } )()
 }
 
 module.exports = PromiseTask

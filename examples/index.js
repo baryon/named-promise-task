@@ -1,31 +1,11 @@
-# A Named Promise Task 
 
-Insipre from https://stackoverflow.com/a/53540586/314173
-
-No Queue, Just a simple promise mechanics to help you run serial tasks.
-
-When you need a Javascript task manager, but no want callback like [async.serrial](http://caolan.github.io/async/v3/)
-
-This package support named tasks, Please read example.js.
-
-## Install 
-``` 
-npm install --save PromiseTask
-```
-
-
-
-## Usage
-``` Javascript
-
-
-const PromiseTask = require('promise-task')
+const PromiseTask = require( '..' )
 
 const sleep = ( ms ) => new Promise( ( resolve, _ ) => setTimeout( () => resolve(), ms ) )
 
 const that = 'outer'
 const fetch = async ( p1 ) => {
-  await sleep( 1000 )
+  await sleep( 2000 )
   console.log( 'fetch', p1, this, that )
   return 'fetch result'
 }
@@ -33,12 +13,12 @@ const fetch = async ( p1 ) => {
 async function fetch2 ( p1, p2 ) {
   await sleep( 1000 )
   //"this" is context
-  console.log( 'fetch2', p1, p2 )
+  console.log( 'fetch2', p1, p2, that )
 }
 
 
 const error = async ( ...values ) => {
-  await sleep( 1000 )
+  await sleep( 3000 )
   throw 'error'
 }
 
@@ -46,8 +26,8 @@ async function test () {
   const that = 'inner'
 
   const upload = async ( p1, p2, p3 ) => {
-    await sleep( 1000 )
-    console.log( 'upload', p1, p2, p3 )
+    await sleep( 2000 )
+    console.log( 'upload', p1, p2, p3, that )
   }
 
   const manager = new PromiseTask( this, {
@@ -63,9 +43,11 @@ async function test () {
   manager.addTask( 'upload', 4, "str", { options: 4 } )
   await sleep( 1000 )
   manager.addTask( 'fetch', 5, "str", { options: 5 } )
+
+  const items = [11,22,33,44,55,66]
+  items.forEach(item => {
+    manager.addTask('fetch', item)
+  });
 }
 
 test()
-
-
-```
