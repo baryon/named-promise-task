@@ -37,17 +37,46 @@ async function test () {
     error: error
   } )
 
-  manager.addTask( 'fetch', 1 ).then( console.log )
-  manager.addTask( 'fetch2', 2, "str" )
-  manager.addTask( 'error', 3, "str", { options: 3 } ).then( console.log ).catch( console.error )
-  manager.addTask( 'upload', 4, "str", { options: 4 } )
+  manager.on('start', () =>{
+    console.log('start')
+  })
+  manager.on('stop', () =>{
+    console.log('stop')
+  })
+
+  console.log('isRunning', manager.isRunning)
+
+  manager.addTask( 'fetch', 1 ).then( (...results) => {
+    console.log(...results)
+  }  ).finally(()=>{
+    console.log(manager.size)
+  })
+  manager.addTask( 'fetch2', 2, "str" ).finally(()=>{
+    console.log(manager.size)
+  })
+  manager.addTask( 'error', 3, "str", { options: 3 } ).then( console.log ).catch( console.error ).finally(()=>{
+    console.log(manager.size)
+  })
+  manager.addTask( 'upload', 4, "str", { options: 4 } ).finally(()=>{
+    console.log(manager.size)
+  })
   await sleep( 1000 )
-  manager.addTask( 'fetch', 5, "str", { options: 5 } )
+  manager.addTask( 'fetch', 5, "str", { options: 5 } ).finally(()=>{
+    console.log(manager.size)
+  })
+  console.log('isRunning', manager.isRunning)
 
   const items = [11,22,33,44,55,66]
   items.forEach(item => {
-    manager.addTask('fetch', item)
+    manager.addTask('fetch', item).finally(()=>{
+      console.log(manager.size)
+      console.log('isRunning', manager.isRunning)
+
+    })
   });
+
+  console.log('isRunning', manager.isRunning)
+
 }
 
 test()
