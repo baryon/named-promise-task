@@ -16,6 +16,40 @@ npm install --save named-promise-task
 
 
 ## Usage
+
+### Method
+```
+addTask: Add a named task with parameters
+```
+
+### Properties
+```
+size: the running task numbers
+```
+
+```
+isRunning: true/false of having running task
+```
+
+### Events
+```
+start: one or more tasks is running
+```
+
+```
+stop: all task completed
+```
+
+### Promise methods
+```
+then: the tasks's result
+```
+
+```
+catch: a exception from task
+```
+
+### Examples
 ``` Javascript
 
 
@@ -56,6 +90,13 @@ async function test () {
     upload: upload,
     error: error
   } )
+
+  manager.on('start', () =>{
+    console.log('start')
+  })
+  manager.on('stop', () =>{
+    console.log('stop')
+  })
 
   manager.addTask( 'fetch', 1 ).then( console.log )
   manager.addTask( 'fetch2', 2, "str" )
