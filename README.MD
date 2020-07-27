@@ -4,7 +4,7 @@ Insipre from https://stackoverflow.com/a/53540586/314173
 
 No Queue, Just a simple promise mechanics to help you run serial tasks.
 
-When you need a Javascript task manager, but no want callback like [async.serrial](http://caolan.github.io/async/v3/)
+When you need a Javascript task manager, but no want callback like [async.queue](https://caolan.github.io/async/v3/docs.html#queue)
 
 This package support named tasks, Please read example.js.
 
