@@ -42,11 +42,11 @@ stop: all task completed
 
 ### Promise methods
 ```
-then: the tasks's result
+then: the task's result
 ```
 
 ```
-catch: a exception from task
+catch: an exception from task
 ```
 
 ### Examples
