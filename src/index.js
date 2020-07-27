@@ -1,6 +1,6 @@
 /**
  * A Named Promise Task 
- * Insipre from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
+ * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 import { EventEmitter } from 'events'
 

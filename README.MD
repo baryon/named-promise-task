@@ -1,6 +1,6 @@
 # A Named Promise Task 
 
-Insipre from https://stackoverflow.com/a/53540586/314173
+Inspire from https://stackoverflow.com/a/53540586/314173
 
 No Queue, Just a simple promise mechanics to help you run serial tasks.
 
