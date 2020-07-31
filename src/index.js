@@ -3,6 +3,7 @@
  * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 import { EventEmitter } from 'events'
+import { Promise } from 'bluebird'
 
 class PromiseTask extends EventEmitter {
   constructor ( context, namedWorkers ) {

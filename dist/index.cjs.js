@@ -23,9 +23,11 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 var events = require('events');
+
+var bluebird = require('bluebird');
 /**
  * A Named Promise Task 
- * Insipre from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
+ * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 
 
@@ -42,7 +44,7 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
     _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "addTask", function () {
-      var pending = Promise.resolve();
+      var pending = bluebird.Promise.resolve();
 
       var run = /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(name) {
@@ -106,7 +108,7 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
 
     _this._context = context;
     _this._namedWorkers = namedWorkers;
-    _this._pending = Promise.resolve();
+    _this._pending = bluebird.Promise.resolve();
     _this._size = 0;
     return _this;
   } // task queue size

@@ -13,9 +13,10 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 import { EventEmitter } from 'events';
+import { Promise } from 'bluebird';
 /**
  * A Named Promise Task 
- * Insipre from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
+ * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 
 var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
