@@ -13,12 +13,7 @@ This package support named tasks, Please read example.js.
 npm install --save named-promise-task
 ```
 
-when you want use it as commonjs module, install core-js too.
-``` 
-npm install --save core-js@3
-```
-
-
+Need platform supoort [Promise.finally](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally)
 
 ## Usage
 

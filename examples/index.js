@@ -14,6 +14,7 @@ async function fetch2 ( p1, p2 ) {
   await sleep( 1000 )
   // "this" is context
   console.log( 'fetch2', p1, p2, that )
+  return Promise.resolve('fetch2 result')
 }
 
 const error = async ( ...values ) => {
@@ -50,7 +51,9 @@ async function test () {
   } ).finally( () => {
     console.log( manager.size )
   } )
-  manager.addTask( 'fetch2', 2, 'str' ).finally( () => {
+  manager.addTask( 'fetch2', 2, 'str' ).then( ( ...results ) => {
+    console.log( ...results )
+  } ).finally( () => {
     console.log( manager.size )
   } )
   manager.addTask( 'error', 3, 'str', { options: 3 } )
