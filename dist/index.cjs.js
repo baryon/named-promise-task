@@ -12,7 +12,7 @@ var _defineProperty = require("@babel/runtime/helpers/defineProperty");
 
 var events = require('events');
 /**
- * A Named Promise Task 
+ * A Named Promise Task
  * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 
