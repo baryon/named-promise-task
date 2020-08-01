@@ -35,7 +35,7 @@ class PromiseTask extends events.EventEmitter {
             values[_key - 1] = arguments[_key];
           }
 
-          return _this._namedWorkers[name].call(_this._context, ...values).finally(() => {
+          return Promise.resolve(_this._namedWorkers[name].call(_this._context, ...values)).finally(() => {
             _this._size--;
 
             if (_this._size === 0) {

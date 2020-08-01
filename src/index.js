@@ -31,7 +31,7 @@ class PromiseTask extends EventEmitter {
       try {
         await pending
       } finally {
-        return this._namedWorkers[name].call(this._context, ...values).finally(() => {
+        return Promise.resolve(this._namedWorkers[name].call(this._context, ...values)).finally(() => {
           this._size--
           if (this._size === 0) {
             this.emit('stop')
