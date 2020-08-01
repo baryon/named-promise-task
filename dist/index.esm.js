@@ -1,4 +1,7 @@
-import "core-js/modules/es7.promise.finally";
+import "core-js/modules/es.array.iterator";
+import "core-js/modules/es.promise";
+import "core-js/modules/es.promise.finally";
+import "core-js/modules/web.dom-collections.iterator";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import { EventEmitter } from 'events';
 /**

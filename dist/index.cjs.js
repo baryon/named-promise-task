@@ -1,6 +1,12 @@
 'use strict';
 
-require("core-js/modules/es7.promise.finally");
+require("core-js/modules/es.array.iterator");
+
+require("core-js/modules/es.promise");
+
+require("core-js/modules/es.promise.finally");
+
+require("core-js/modules/web.dom-collections.iterator");
 
 var _defineProperty = require("@babel/runtime/helpers/defineProperty");
 

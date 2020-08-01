@@ -33,7 +33,6 @@ export default [
               debug: true,
               useBuiltIns: "usage",
               shippedProposals: true,
-              include: [ "es7.promise.finally" ],
               targets: {
                 node: "8.10",
                 edge: "17",
@@ -41,6 +40,7 @@ export default [
                 chrome: "67",
                 safari: "11.1",
               },
+              corejs: 3
             } ]
         ],
         plugins: [ "@babel/plugin-transform-runtime", "@babel/plugin-proposal-object-rest-spread", "@babel/plugin-proposal-class-properties" ]
