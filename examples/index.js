@@ -46,16 +46,22 @@ async function test () {
 
   console.log( 'isRunning', manager.isRunning )
 
-  manager.addTask( 'fetch', 1 ).then( ( ...results ) => {
+  let result = await manager.addTask( 'fetch', 1 ).then( ( ...results ) => {
     console.log( ...results )
+    return results
   } ).finally( () => {
     console.log( manager.size )
   } )
-  manager.addTask( 'fetch2', 2, 'str' ).then( ( ...results ) => {
+  console.log('result:', result)
+
+  result = await manager.addTask( 'fetch2', 2, 'str' ).then( ( ...results ) => {
     console.log( ...results )
+    return results
   } ).finally( () => {
     console.log( manager.size )
   } )
+  console.log('result:', result)
+
   manager.addTask( 'error', 3, 'str', { options: 3 } )
     .then( console.log )
     .catch( ( e ) => {
