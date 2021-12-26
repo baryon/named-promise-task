@@ -1,5 +1,5 @@
 
-const PromiseTask = require( '..' )
+const PromiseTask = require( '../src' )
 
 const sleep = ( ms ) => new Promise( ( resolve, _ ) => setTimeout( () => resolve(), ms ) )
 
@@ -44,7 +44,7 @@ async function test () {
     console.log( 'stop' )
   } )
 
-  console.log( 'isRunning', manager.isRunning )
+  console.log( 'isRunning', manager.isRunning, manager.currentTaskName )
 
   let result = await manager.addTask( 'fetch', 1 ).then( ( ...results ) => {
     console.log( ...results )
@@ -58,7 +58,7 @@ async function test () {
     console.log( ...results )
     return results
   } ).finally( () => {
-    console.log( manager.size )
+    console.log( manager.size, manager.currentTaskName )
   } )
   console.log('result:', result)
 
@@ -68,7 +68,7 @@ async function test () {
       console.error( 'error', e )
     } )
     .finally( () => {
-      console.log( manager.size )
+      console.log( manager.size, manager.currentTaskName )
     } )
   manager.addTask( 'upload', 4, 'str', { options: 4 } ).finally( () => {
     console.log( manager.size )
@@ -77,17 +77,17 @@ async function test () {
   manager.addTask( 'fetch', 5, 'str', { options: 5 } ).finally( () => {
     console.log( manager.size )
   } )
-  console.log( 'isRunning', manager.isRunning )
+  console.log( 'isRunning', manager.isRunning, manager.currentTaskName )
 
   const items = [ 11, 22, 33, 44, 55, 66 ]
   items.forEach( item => {
     manager.addTask( 'fetch', item ).finally( () => {
       console.log( manager.size )
-      console.log( 'isRunning', manager.isRunning )
+      console.log( 'isRunning', manager.isRunning, manager.currentTaskName )
     } )
   } )
 
-  console.log( 'isRunning', manager.isRunning )
+  console.log( 'isRunning', manager.isRunning, manager.currentTaskName )
 }
 
 test()

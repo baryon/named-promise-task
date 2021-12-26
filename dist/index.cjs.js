@@ -22,15 +22,19 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-var events = require('events');
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var eventemitter3 = require('eventemitter3');
 /**
  * A Named Promise Task
  * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
  */
 
 
-var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
-  _inherits(PromiseTask, _events$EventEmitter);
+var PromiseTask = /*#__PURE__*/function (_eventemitter3$EventE) {
+  _inherits(PromiseTask, _eventemitter3$EventE);
 
   var _super = _createSuper(PromiseTask);
 
@@ -62,6 +66,7 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
 
                 case 3:
                   _context.prev = 3;
+                  _this._name = name;
 
                   for (_len = _args.length, values = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                     values[_key - 1] = _args[_key];
@@ -71,16 +76,18 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
                     _this._size--;
 
                     if (_this._size === 0) {
+                      _this._name = null;
+
                       _this.emit('stop');
                     }
                   }));
 
-                case 7:
+                case 8:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0,, 3, 7]]);
+          }, _callee, null, [[0,, 3, 8]]);
         }));
 
         return function run(_x) {
@@ -93,6 +100,8 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
         _this._size++;
 
         if (_this._size === 1) {
+          _this._name = name;
+
           _this.emit('start');
         }
 
@@ -108,6 +117,7 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
     _this._namedWorkers = namedWorkers;
     _this._pending = Promise.resolve();
     _this._size = 0;
+    _this._name = null;
     return _this;
   } // task queue size
 
@@ -122,12 +132,18 @@ var PromiseTask = /*#__PURE__*/function (_events$EventEmitter) {
     key: "isRunning",
     get: function get() {
       return this._size !== 0;
+    } // current task name
+
+  }, {
+    key: "currentTaskName",
+    get: function get() {
+      return this._name;
     } // task executor
 
   }]);
 
   return PromiseTask;
-}(events.EventEmitter);
+}(eventemitter3.EventEmitter);
 
-module.exports = PromiseTask;
+exports.PromiseTask = PromiseTask;
 //# sourceMappingURL=index.cjs.js.map

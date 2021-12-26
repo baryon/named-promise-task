@@ -12,7 +12,7 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'eventemitter3';
 /**
  * A Named Promise Task
  * Inspire from https://stackoverflow.com/questions/53540348/js-async-await-tasks-queue
@@ -51,6 +51,7 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
 
                 case 3:
                   _context.prev = 3;
+                  _this._name = name;
 
                   for (_len = _args.length, values = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                     values[_key - 1] = _args[_key];
@@ -60,16 +61,18 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
                     _this._size--;
 
                     if (_this._size === 0) {
+                      _this._name = null;
+
                       _this.emit('stop');
                     }
                   }));
 
-                case 7:
+                case 8:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0,, 3, 7]]);
+          }, _callee, null, [[0,, 3, 8]]);
         }));
 
         return function run(_x) {
@@ -82,6 +85,8 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
         _this._size++;
 
         if (_this._size === 1) {
+          _this._name = name;
+
           _this.emit('start');
         }
 
@@ -97,6 +102,7 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
     _this._namedWorkers = namedWorkers;
     _this._pending = Promise.resolve();
     _this._size = 0;
+    _this._name = null;
     return _this;
   } // task queue size
 
@@ -111,6 +117,12 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
     key: "isRunning",
     get: function get() {
       return this._size !== 0;
+    } // current task name
+
+  }, {
+    key: "currentTaskName",
+    get: function get() {
+      return this._name;
     } // task executor
 
   }]);
@@ -118,5 +130,5 @@ var PromiseTask = /*#__PURE__*/function (_EventEmitter) {
   return PromiseTask;
 }(EventEmitter);
 
-export { PromiseTask as default };
+export { PromiseTask };
 //# sourceMappingURL=index.esm.js.map
